@@ -42,14 +42,15 @@ app.post('/', function(request, res) {
 //      resp = {'output': {'text': searchResponse.response.docs[0].contentHtml ,'type':'rankret'}};
 //      res.send(JSON.stringify(resp));
         //res.send(searchResponse.response.docs[0]);
+      res.setHeader('Content-Type', 'application/json'); //Requires application/json MIME type
+  res.send(JSON.stringify({ "speech": response, "displayText": response 
+  //"speech" is the spoken version of the response, "displayText" is the visual version
+  }));
     }
 });
 
   
-res.setHeader('Content-Type', 'application/json'); //Requires application/json MIME type
-  res.send(JSON.stringify({ "speech": response, "displayText": response 
-  //"speech" is the spoken version of the response, "displayText" is the visual version
-  }));
+
   
 });
 
