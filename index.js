@@ -28,7 +28,9 @@ app.post('/', function(request, res) {
   var response = "This is a sample response from your webhook!" //Default response from the webhook to show it's working;
   solrClient = retrieve_and_rank.createSolrClient(params);
   var query = solrClient.createQuery();
-  query.q('how to add a new policy');
+  query.q(request.result.parameters.question);
+  console.log(request.result.parameters.question);
+  
   solrClient.search(query, function(err, searchResponse) {
   if(err) {
     console.log('Error searching for documents: ' + err);
@@ -43,7 +45,7 @@ app.post('/', function(request, res) {
 //      res.send(JSON.stringify(resp));
         //res.send(searchResponse.response.docs[0]);
       res.setHeader('Content-Type', 'application/json'); //Requires application/json MIME type
-  res.send(JSON.stringify({ "speech": response, "displayText": response 
+  res.send(JSON.stringify({ "speech": response, "displayText": response ,"data": {"telegram": {searchResponse.response.docs[0].contentHtml}}
   //"speech" is the spoken version of the response, "displayText" is the visual version
   }));
     }
