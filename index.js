@@ -1,5 +1,23 @@
 var express = require('express');
 var app = express();
+const watson = require('watson-developer-cloud'); // watson sdk
+var retrieve_and_rank = watson.retrieve_and_rank({
+  username: 'f52ce40c-c4b3-4bce-bef1-18d45b7cb6c2',
+  password: 'XKnBPpXiXu3s',
+  version: 'v1'
+});
+var params = {
+  cluster_id: 'scd125453e_b4d5_4c3d_aa20_ccf8e6e5560b',
+  collection_name: 'PolicyQuery',
+  wt: 'json'
+};
+solrClient = retrieve_and_rank.createSolrClient(params);
+
+console.log('Initialize solr client *************');
+
+var query = solrClient.createQuery();
+var resp; 
+console.log('Created query');
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -8,7 +26,24 @@ app.use(express.static(__dirname + '/public'));
 app.post('/', function(request, res) {
   //response.send("Hello World!")
   var response = "This is a sample response from your webhook!" //Default response from the webhook to show it's working;
+  query.q(request.results.parameters.question);
+  solrClient.search(query, function(err, searchResponse) {
+  if(err) {
+    console.log('Error searching for documents: ' + err);
+    res.send(err);
+  }
+    else {
+      console.log('Found ' + searchResponse.response.numFound + ' documents.');
+      console.log('First document: ' + JSON.stringify(searchResponse.response.docs[0], null, 2));
+      console.log('Response content: ' + JSON.stringify(searchResponse.response.docs[0].contentHtml, null, 2));
+      response = searchResponse.response.docs[0].contentHtml;
+//      resp = {'output': {'text': searchResponse.response.docs[0].contentHtml ,'type':'rankret'}};
+//      res.send(JSON.stringify(resp));
+        //res.send(searchResponse.response.docs[0]);
+    }
+});
 
+  
 res.setHeader('Content-Type', 'application/json'); //Requires application/json MIME type
   res.send(JSON.stringify({ "speech": response, "displayText": response 
   //"speech" is the spoken version of the response, "displayText" is the visual version
