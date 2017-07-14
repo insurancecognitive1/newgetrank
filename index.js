@@ -28,8 +28,8 @@ app.post('/', function(request, res) {
   var response = "This is a sample response from your webhook!" //Default response from the webhook to show it's working;
   solrClient = retrieve_and_rank.createSolrClient(params);
   var query = solrClient.createQuery();
-  query.q(request.result.parameters.question);
-  console.log(request.result.parameters.question);
+  query.q("how to add a new policy");
+  //console.log(request.result.parameters.question);
   
   solrClient.search(query, function(err, searchResponse) {
   if(err) {
