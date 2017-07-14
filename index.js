@@ -45,15 +45,11 @@ app.post('/', function(request, res) {
 //      res.send(JSON.stringify(resp));
         //res.send(searchResponse.response.docs[0]);
       res.setHeader('Content-Type', 'application/json'); //Requires application/json MIME type
-  res.send(JSON.stringify({ "speech": response, "displayText": response ,"data": {"telegram": {searchResponse.response.docs[0].contentHtml}}
-  //"speech" is the spoken version of the response, "displayText" is the visual version
-  }));
+  //res.send(JSON.stringify({ "speech": response, "displayText": response ,"data": {"telegram": {searchResponse.response.docs[0].contentHtml}}}));
+      res.send(JSON.stringify({ "speech": response, "displayText": response }));
     }
 });
-
-  
-
-  
+    
 });
 
 app.listen(app.get('port'), function() {
