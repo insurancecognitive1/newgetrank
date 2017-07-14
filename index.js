@@ -11,13 +11,13 @@ var params = {
   collection_name: 'PolicyQuery',
   wt: 'json'
 };
-solrClient = retrieve_and_rank.createSolrClient(params);
 
-console.log('Initialize solr client *************');
 
-var query = solrClient.createQuery();
-var resp; 
-console.log('Created query');
+//console.log('Initialize solr client *************');
+
+
+//var resp; 
+//console.log('Created query');
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -26,7 +26,9 @@ app.use(express.static(__dirname + '/public'));
 app.post('/', function(request, res) {
   //response.send("Hello World!")
   var response = "This is a sample response from your webhook!" //Default response from the webhook to show it's working;
-  query.q(request.results.parameters.question);
+  solrClient = retrieve_and_rank.createSolrClient(params);
+  var query = solrClient.createQuery();
+  query.q('how to add a new policy');
   solrClient.search(query, function(err, searchResponse) {
   if(err) {
     console.log('Error searching for documents: ' + err);
