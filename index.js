@@ -1,8 +1,15 @@
-exports.helloHttp = function helloHttp (req, res) {
-  response = "This is a sample response from your webhook!" //Default response from the webhook to show it's working
+var express = require('express')
+var app = express()
 
-res.setHeader('Content-Type', 'application/json'); //Requires application/json MIME type
-  res.send(JSON.stringify({ "speech": response, "displayText": response 
-  //"speech" is the spoken version of the response, "displayText" is the visual version
-  }));
-};
+//app.set('port', (process.env.PORT || 5000))
+//app.use(express.static(__dirname + '/public'))
+
+app.get('/', function(request, response) {
+  response.send('Hello World!')
+})
+
+/*
+app.listen(app.get('port'), function() {
+  console.log("Node app is running at localhost:" + app.get('port'))
+})
+*/
