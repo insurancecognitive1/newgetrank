@@ -29,7 +29,7 @@ app.post('/', function(request, res) {
   solrClient = retrieve_and_rank.createSolrClient(params);
   var query = solrClient.createQuery();
   query.q("how to add a new policy");
-  //console.log(request.result.parameters.question);
+  console.log(request.result.parameters.question);
   
   solrClient.search(query, function(err, searchResponse) {
   if(err) {
@@ -45,8 +45,8 @@ app.post('/', function(request, res) {
 //      res.send(JSON.stringify(resp));
         //res.send(searchResponse.response.docs[0]);
       res.setHeader('Content-Type', 'application/json'); //Requires application/json MIME type
-  //res.send(JSON.stringify({ "speech": response, "displayText": response ,"data": {"telegram": {searchResponse.response.docs[0].contentHtml}}}));
-      res.send(JSON.stringify({ "speech": response, "displayText": response }));
+  res.send(JSON.stringify({ "speech": response, "displayText": response ,"data": {"telegram": {"text":searchResponse.response.docs[0].contentHtml}}}));
+  //    res.send(JSON.stringify({ "speech": response, "displayText": response }));
     }
 });
     
