@@ -17,13 +17,13 @@ app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
 
-app.post('/', function(request, res) {
+app.post('/', function(req, res) {
   //response.send("Hello World!")
   var response = "This is a sample response from your webhook!" //Default response from the webhook to show it's working;
   solrClient = retrieve_and_rank.createSolrClient(params);
   var query = solrClient.createQuery();
   query.q("how to add a new policy");
-  console.log('log request', request);
+  console.log('log request', req.body);
   
   solrClient.search(query, function(err, searchResponse) {
   if(err) {
