@@ -23,7 +23,7 @@ app.post('/', function(request, res) {
   solrClient = retrieve_and_rank.createSolrClient(params);
   var query = solrClient.createQuery();
   query.q("how to add a new policy");
-  console.log('log request'+ request);
+  console.log('log request'+ request.toSource());
   
   solrClient.search(query, function(err, searchResponse) {
   if(err) {
@@ -32,7 +32,7 @@ app.post('/', function(request, res) {
   }
     else {
       console.log('Found ' + searchResponse.response.numFound + ' documents.');
-      console.log('First document: ' + JSON.stringify(searchResponse.response.docs[0], null, 2));
+//      console.log('First document: ' + JSON.stringify(searchResponse.response.docs[0], null, 2));
       console.log('Response content: ' + JSON.stringify(searchResponse.response.docs[0].body, null, 2));
       response = searchResponse.response.docs[0].body;
 //      resp = {'output': {'text': searchResponse.response.docs[0].contentHtml ,'type':'rankret'}};
