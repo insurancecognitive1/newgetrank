@@ -23,7 +23,7 @@ app.post('/', function(request, res) {
   solrClient = retrieve_and_rank.createSolrClient(params);
   var query = solrClient.createQuery();
   query.q("how to add a new policy");
-  console.log('log request'+ JSON.parse(request.body));
+  console.log('log request'+ request);
   
   solrClient.search(query, function(err, searchResponse) {
   if(err) {
