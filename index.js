@@ -13,12 +13,6 @@ var params = {
 };
 
 
-//console.log('Initialize solr client *************');
-
-
-//var resp; 
-//console.log('Created query');
-
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
@@ -45,7 +39,7 @@ app.post('/', function(request, res) {
 //      res.send(JSON.stringify(resp));
         //res.send(searchResponse.response.docs[0]);
       res.setHeader('Content-Type', 'application/json'); //Requires application/json MIME type
-  res.send(JSON.stringify({ "speech": response, "displayText": response ,"data": {"telegram": {"text":searchResponse.response.docs[0].contentHtml}}}));
+  res.send(JSON.stringify({ "speech": response, "displayText": response ,"data": {"skype": {"text":searchResponse.response.docs[0].contentHtml}}}));
   //    res.send(JSON.stringify({ "speech": response, "displayText": response }));
     }
 });
