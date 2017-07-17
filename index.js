@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
 const watson = require('watson-developer-cloud'); // watson sdk
 var retrieve_and_rank = watson.retrieve_and_rank({
   username: 'f52ce40c-c4b3-4bce-bef1-18d45b7cb6c2',
@@ -15,7 +16,7 @@ var params = {
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(express.static(__dirname + '/public'));
+//app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({
     extended: true
 }));
