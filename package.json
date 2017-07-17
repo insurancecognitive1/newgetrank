@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "express": "^4.13.3",
-    "watson-developer-cloud": "^2.34.0"
+    "watson-developer-cloud": "^2.34.0",
+    "body-parser": "^1.17.2"
   },
   "engines": {
     "node": "4.0.0"
