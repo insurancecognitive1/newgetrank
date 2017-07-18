@@ -37,7 +37,7 @@ app.post('/', function(req, res) {
   }
     else {
       console.log('Found ' + searchResponse.response.numFound + ' documents.');
-//      console.log('First document: ' + JSON.stringify(searchResponse.response.docs[0], null, 2));
+     console.log('First document: ' + JSON.stringify(searchResponse.response.docs[0], null, 2));
       console.log('Response content: ' + JSON.stringify(searchResponse.response.docs[0].body, null, 2));
       response = searchResponse.response.docs[0].body + '\n Is there anything else I can assist you with?';
 //      resp = {'output': {'text': searchResponse.response.docs[0].contentHtml ,'type':'rankret'}};
