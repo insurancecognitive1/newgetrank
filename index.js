@@ -40,7 +40,7 @@ app.post('/', function(req, res) {
     else {
       console.log('Found ' + searchResponse.response.numFound + ' documents.');
      console.log('First document: ' + JSON.stringify(searchResponse.response.docs[0], null, 2));
-      result = JSON.parse(JSON.stringify(searchResponse.response.docs[0].body, null, '\t').toString()).replace(/\/g,'\n');
+      result = JSON.parse(JSON.stringify(searchResponse.response.docs[0].body, null, '\t').toString()).replace(/\\n/g,'\n');
       // result = JSON.parse(searchResponse.response.docs[0].body);//.replace(/\n/g,'\n');
       console.log('Response content: ' + result);
       //response = querystring.escape(result);
