@@ -42,7 +42,7 @@ app.post('/', function(req, res) {
       result = JSON.stringify(searchResponse.response.docs[0].body, null, 2);
       console.log('Response content: ' + result);
       response = result;
-      if ( result.includes('Endorse'))
+      if ( result.includes('endorse'))
       {
         console.log('No append needed for endorse');
       }
