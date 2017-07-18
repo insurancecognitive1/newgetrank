@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 
 app.post('/', function(req, res) {
   //response.send("Hello World!")
-  var response = "This is a sample response from your webhook!" //Default response from the webhook to show it's working;
+  var response = 'This is a sample response from your webhook!' //Default response from the webhook to show it's working;
   solrClient = retrieve_and_rank.createSolrClient(params);
   var query = solrClient.createQuery();
   var result;
@@ -41,7 +41,7 @@ app.post('/', function(req, res) {
      console.log('First document: ' + JSON.stringify(searchResponse.response.docs[0], null, 2));
       result = JSON.parse(JSON.stringify(searchResponse.response.docs[0].body, null, 2));
       console.log('Response content: ' + result);
-      response = result;
+      response = result.toString();
       if ( result.includes('endorse'))
       {
         console.log('No append needed for endorse');
@@ -53,6 +53,7 @@ app.post('/', function(req, res) {
 //      resp = {'output': {'text': searchResponse.response.docs[0].contentHtml ,'type':'rankret'}};
 //      res.send(JSON.stringify(resp));
         //res.send(searchResponse.response.docs[0]);
+      console.log('Final content: ' + response);
       res.setHeader('Content-Type', 'application/json'); //Requires application/json MIME type
   res.send(JSON.stringify({ "speech": response, "displayText": response ,"data": {"skype": {"text":JSON.parse(JSON.stringify(searchResponse.response.docs[0].contentHtml, null, 2))}}}));
   //    res.send(JSON.stringify({ "speech": response, "displayText": response }));
