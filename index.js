@@ -42,8 +42,8 @@ app.post('/', function(req, res) {
      console.log('First document: ' + JSON.stringify(searchResponse.response.docs[0], null, 2));
       result = JSON.parse(JSON.stringify(searchResponse.response.docs[0].body, null, 2));
       console.log('Response content: ' + result);
-      response = querystring.escape(result);
-      response=response.toString();
+      //response = querystring.escape(result);
+      response="How to add new policy? \n\n1. Type in the link to start the policy application www.createnewpolicy.com \n\n ";
       if ( result.includes('endorse'))
       {
         console.log('No append needed for endorse');
