@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+const querystring = require('querystring');
 const watson = require('watson-developer-cloud'); // watson sdk
 var retrieve_and_rank = watson.retrieve_and_rank({
   username: 'f52ce40c-c4b3-4bce-bef1-18d45b7cb6c2',
@@ -41,7 +42,7 @@ app.post('/', function(req, res) {
      console.log('First document: ' + JSON.stringify(searchResponse.response.docs[0], null, 2));
       result = JSON.parse(JSON.stringify(searchResponse.response.docs[0].body, null, 2));
       console.log('Response content: ' + result);
-      response = result.toString();
+      response = querystring.parse(result);
       if ( result.includes('endorse'))
       {
         console.log('No append needed for endorse');
