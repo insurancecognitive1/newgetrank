@@ -42,7 +42,7 @@ app.post('/', function(req, res) {
      console.log('First document: ' + JSON.stringify(searchResponse.response.docs[0], null, 2));
       result = JSON.parse(JSON.stringify(searchResponse.response.docs[0].body, null, 2));
       console.log('Response content: ' + result);
-      response = querystring.parse(result);
+      response = querystring.escape(result);
       response=response.toString();
       if ( result.includes('endorse'))
       {
