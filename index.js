@@ -40,10 +40,10 @@ app.post('/', function(req, res) {
     else {
       console.log('Found ' + searchResponse.response.numFound + ' documents.');
      console.log('First document: ' + JSON.stringify(searchResponse.response.docs[0], null, 2));
-      result = JSON.parse(JSON.stringify(searchResponse.response.docs[0].body, null, 2));
+      result = JSON.parse(JSON.stringify(searchResponse.response.docs[0].body, null, "\n"));
       console.log('Response content: ' + result);
       //response = querystring.escape(result);
-      response="How to add new policy? \n\n1. Type in the link to start the policy application www.createnewpolicy.com \n\n ";
+      response=result;
       if ( result.includes('endorse'))
       {
         console.log('No append needed for endorse');
