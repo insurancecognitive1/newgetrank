@@ -39,7 +39,7 @@ app.post('/', function(req, res) {
     else {
       console.log('Found ' + searchResponse.response.numFound + ' documents.');
      console.log('First document: ' + JSON.stringify(searchResponse.response.docs[0], null, 2));
-      result = JSON.stringify(searchResponse.response.docs[0].body, null, 2);
+      result = JSON.parse(JSON.stringify(searchResponse.response.docs[0].body, null, 2));
       console.log('Response content: ' + result);
       response = result;
       if ( result.includes('endorse'))
