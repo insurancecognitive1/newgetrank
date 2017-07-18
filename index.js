@@ -43,6 +43,7 @@ app.post('/', function(req, res) {
       result = JSON.parse(JSON.stringify(searchResponse.response.docs[0].body, null, 2));
       console.log('Response content: ' + result);
       response = querystring.parse(result);
+      response=response.toString();
       if ( result.includes('endorse'))
       {
         console.log('No append needed for endorse');
@@ -55,7 +56,7 @@ app.post('/', function(req, res) {
 //      res.send(JSON.stringify(resp));
         //res.send(searchResponse.response.docs[0]);
       console.log('Final content: ' + response.toString());
-      response=response.toString();
+      
       res.setHeader('Content-Type', 'application/json'); //Requires application/json MIME type
   res.send(JSON.stringify({ "speech": response, "displayText": response ,"data": {"skype": {"text":JSON.parse(JSON.stringify(searchResponse.response.docs[0].contentHtml, null, 2))}}}));
   //    res.send(JSON.stringify({ "speech": response, "displayText": response }));
