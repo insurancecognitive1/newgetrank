@@ -54,7 +54,7 @@ app.post('/', function(req, res) {
 //      res.send(JSON.stringify(resp));
         //res.send(searchResponse.response.docs[0]);
       res.setHeader('Content-Type', 'application/json'); //Requires application/json MIME type
-  res.send(JSON.stringify({ "speech": response, "displayText": response ,"data": {"skype": {"text":response}}}));
+  res.send(JSON.stringify({ "speech": response, "displayText": response ,"data": {"skype": {"text":JSON.parse(JSON.stringify(searchResponse.response.docs[0].contentHtml, null, 2))}}}));
   //    res.send(JSON.stringify({ "speech": response, "displayText": response }));
     }
 });
