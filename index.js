@@ -27,6 +27,7 @@ app.post('/', function(req, res) {
   var response = "This is a sample response from your webhook!" //Default response from the webhook to show it's working;
   solrClient = retrieve_and_rank.createSolrClient(params);
   var query = solrClient.createQuery();
+  var result;
   query.q(req.body.result.parameters['question']);
   console.log('log request', req.body.result.parameters['question']);
   
@@ -38,13 +39,22 @@ app.post('/', function(req, res) {
     else {
       console.log('Found ' + searchResponse.response.numFound + ' documents.');
      console.log('First document: ' + JSON.stringify(searchResponse.response.docs[0], null, 2));
-      console.log('Response content: ' + JSON.stringify(searchResponse.response.docs[0].body, null, 2));
-      response = searchResponse.response.docs[0].body + '\n Is there anything else I can assist you with?';
+      result = JSON.stringify(searchResponse.response.docs[0], null, 2);
+      console.log('Response content: ' + JSON.stringify(result.body, null, 2));
+      response = result.body;
+      if ( result.fileName.includes('Endorse'))
+      {
+        console.log('No append needed for endorse');
+      }
+      else
+      {
+        response = response + '\n\n Is there anything else I can assist you with?';
+      }
 //      resp = {'output': {'text': searchResponse.response.docs[0].contentHtml ,'type':'rankret'}};
 //      res.send(JSON.stringify(resp));
         //res.send(searchResponse.response.docs[0]);
       res.setHeader('Content-Type', 'application/json'); //Requires application/json MIME type
-  res.send(JSON.stringify({ "speech": response, "displayText": response ,"data": {"skype": {"text":searchResponse.response.docs[0].contentHtml}}}));
+  res.send(JSON.stringify({ "speech": response, "displayText": response ,"data": {"skype": {"text":response}}}));
   //    res.send(JSON.stringify({ "speech": response, "displayText": response }));
     }
 });
