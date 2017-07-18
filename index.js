@@ -40,9 +40,9 @@ app.post('/', function(req, res) {
       console.log('Found ' + searchResponse.response.numFound + ' documents.');
      console.log('First document: ' + JSON.stringify(searchResponse.response.docs[0], null, 2));
       result = JSON.stringify(searchResponse.response.docs[0], null, 2);
-      console.log('Response content: ' + JSON.stringify(result.body, null, 2));
+      console.log('Response content: ' + result.body);
       response = result.body;
-      if ( result.fileName.includes('Endorse'))
+      if ( result.body.includes('Endorse'))
       {
         console.log('No append needed for endorse');
       }
