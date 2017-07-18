@@ -54,7 +54,8 @@ app.post('/', function(req, res) {
 //      resp = {'output': {'text': searchResponse.response.docs[0].contentHtml ,'type':'rankret'}};
 //      res.send(JSON.stringify(resp));
         //res.send(searchResponse.response.docs[0]);
-      console.log('Final content: ' + response);
+      console.log('Final content: ' + response.toString());
+      response=response.toString();
       res.setHeader('Content-Type', 'application/json'); //Requires application/json MIME type
   res.send(JSON.stringify({ "speech": response, "displayText": response ,"data": {"skype": {"text":JSON.parse(JSON.stringify(searchResponse.response.docs[0].contentHtml, null, 2))}}}));
   //    res.send(JSON.stringify({ "speech": response, "displayText": response }));
